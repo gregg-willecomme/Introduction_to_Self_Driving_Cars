@@ -1,36 +1,63 @@
-# Introduction_to_Self_Driving_Cars
-# 🚗 Longitudinal Vehicle Dynamics and Control
+# 🚗 Vehicle Modeling, Control, and CARLA Simulation
 
-This repository contains a simulation of a vehicle's longitudinal dynamics and its control system using Python and Jupyter Notebooks. It is based on simplified vehicle modeling and includes a feedforward+feedback PID throttle controller.
+This repository presents a complete project on vehicle motion modeling and control, including:
+
+- Two educational Jupyter notebooks
+- A final integrated autonomous driving project in the CARLA simulator
 
 ---
 
-## 📂 Contents
+## 📚 Project Structure
 
-- `Longitudinal_Vehicle_Model.ipynb`  
-  Simulates the vehicle's longitudinal dynamics using a second-order model with engine force, drag, rolling resistance, and slope effects.
+### 1. `Bicycle_Kinematic_Model.ipynb`
+A simplified lateral vehicle model using bicycle geometry. It demonstrates the basics of path tracking using kinematic assumptions, without dynamic slip effects.
 
-- `Controller_Implementation.ipynb`  
-  Implements a feedforward + PID-based throttle control strategy to track a desired velocity profile, based on the dynamic model.
+### 2. `Longitudinal_Vehicle_Model.ipynb`
+A second-order longitudinal vehicle model incorporating:
+- Engine force
+- Aerodynamic drag
+- Rolling resistance
+- Gravitational slope
+
+It implements a **throttle controller** combining:
+- A **PID controller**, tuned via the **Ziegler–Nichols method** (closed-loop tuning using \( K_u \) and \( P_u \))
+- A **feedforward term**, assuming a linear relation between acceleration and throttle
+
+A simple **proportional controller** is used for braking.
+
+---
+
+### 3. `CARLA_Project/`
+Contains the final autonomous control system implemented in the CARLA simulator, including:
+
+- **Longitudinal control**:
+  - PID + feedforward throttle control
+  - Proportional brake control
+  - Time-based speed profiles
+- **Lateral control**:
+  - **Pure Pursuit controller**
+  - **Stanley controller** (as an alternative)
+- **Waypoint tracking**
+- **Real-time CSV logging** and live plotting
 
 ---
 
 ## 🎯 Objectives
 
-- Model the longitudinal dynamics of a ground vehicle.
-- Compute forces acting on the vehicle (aerodynamic, rolling resistance, gravitational).
-- Implement a feedforward control based on inverse dynamics.
-- Tune a PID controller to improve tracking performance.
-- Visualize speed tracking and control signals.
+- Understand both kinematic and dynamic modeling of vehicles
+- Design and tune throttle controllers (feedback + feedforward)
+- Implement robust lateral tracking using geometric control methods
+- Integrate full control systems into a CARLA simulation
 
 ---
 
-## 📈 Example Results
+## 📈 Features
 
-Plots include:
-- Vehicle speed vs desired speed
-- Control inputs (throttle)
-- External forces acting on the system
+- Feedforward-based acceleration control
+- Ziegler–Nichols PID tuning
+- Modular control architecture
+- Live plotting and logging
+- Supports lateral and longitudinal decoupled control
 
 ---
 
@@ -40,8 +67,11 @@ Plots include:
 - NumPy
 - Matplotlib
 - Jupyter Notebook
+- CARLA Simulator (e.g. 0.9.6 for Coursera setup)
 
-You can install the required packages with:
 
+Install dependencies:
 ```bash
 pip install numpy matplotlib notebook
+
+
